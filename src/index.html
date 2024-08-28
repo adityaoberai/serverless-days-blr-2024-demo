@@ -5,13 +5,49 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="styles.css">
-  <title>Vanilla JavaScript App</title>
+  <title>Language Translator</title>
+  <script>
+    async function getTranslation() {
+      let text = document.getElementById('text').value;
+      let lang = document.getElementById('lang').value;
+
+      let response = await fetch('/api/translate', {
+        method: 'POST',
+        body: JSON.stringify({ 
+          text, 
+          lang 
+        }), 
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      });
+
+      let translation = await response.json();
+      
+      let translationHtml = document.getElementById("translation");
+      translationHtml.innerHTML = translation.text;
+    }
+  </script>
 </head>
 
 <body>
   <main>
     <h1>Translate text from one language to another</h1>
-    
+    <div id="form">
+      <form id="translationForm" onsubmit="getTranslation(); return false;">
+        <label for="text">Text to translate</label>
+        <input type="text" id="text" name="text" placeholder="Enter your text here">
+        
+        <label for="lang">Language to translate to</label>
+        <input type="text" id="lang" name="lang" placeholder="Spanish">
+
+        <button type="submit">Translate</button>
+      </form>
+    </div>
+    <div id="answer">
+      <h1>Translated text</h1>
+      <h2 id="translation"></h2>
+    </div>
   
   </main>
 </body>

@@ -17,5 +17,10 @@ main {
 
 main > h1 {
   text-align: center;
-  font-size: 3.5em;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
 }
