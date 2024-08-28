@@ -40,7 +40,6 @@ app.http('translate', {
             });
 
             const translatedText = response.choices[0].message.content.trim();
-            context.log(translatedText);
 
             return { 
                 body: JSON.stringify({ 
