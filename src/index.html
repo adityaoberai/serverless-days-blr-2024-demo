@@ -8,10 +8,13 @@
   <title>Language Translator</title>
   <script>
     async function getTranslation() {
-      const button = document.getElementById('submitButton');
-      const buttonText = document.getElementById('buttonText');
-      const loadingIcon = document.getElementById('loadingIcon');
-
+      let button = document.getElementById('submitButton');
+      let buttonText = document.getElementById('buttonText');
+      let loadingIcon = document.getElementById('loadingIcon');
+      let translationHtml = document.getElementById("translation");
+      
+      translationHtml.readOnly = false;
+      translationHtml.value = "";
       button.disabled = true;
       buttonText.style.display = 'none';
       loadingIcon.style.display = 'inline-block';
@@ -31,10 +34,9 @@
       });
 
       let translation = await response.json();
-      
-      let translationHtml = document.getElementById("translation");
       translationHtml.value = translation.text;
-
+      
+      translationHtml.readOnly = true;
       button.disabled = false;
       buttonText.style.display = 'inline-block';
       loadingIcon.style.display = 'none';
