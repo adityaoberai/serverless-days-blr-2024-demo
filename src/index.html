@@ -8,6 +8,14 @@
   <title>Language Translator</title>
   <script>
     async function getTranslation() {
+      const button = document.getElementById('submitButton');
+      const buttonText = document.getElementById('buttonText');
+      const loadingIcon = document.getElementById('loadingIcon');
+
+      button.disabled = true;
+      buttonText.style.display = 'none';
+      loadingIcon.style.display = 'inline-block';
+
       let text = document.getElementById('text').value;
       let lang = document.getElementById('lang').value;
 
@@ -25,7 +33,11 @@
       let translation = await response.json();
       
       let translationHtml = document.getElementById("translation");
-      translationHtml.innerHTML = translation.text;
+      translationHtml.value = translation.text;
+
+      button.disabled = false;
+      buttonText.style.display = 'inline-block';
+      loadingIcon.style.display = 'none';
     }
   </script>
 </head>
@@ -42,14 +54,17 @@
         <label for="lang">Language to translate to</label>
         <input type="text" id="lang" name="lang" placeholder="Spanish">
 
-        <button type="submit">Translate</button>
+        <button type="submit" id="submitButton">
+          <span id="loadingIcon"></span>
+          <span id="buttonText">Translate</span>
+        </button>
       </form>
     </div>
+    <hr>
     <div id="answer">
       <h2>Translated text</h1>
-      <h2 id="translation"></h2>
+      <input type="text" id="translation" placeholder="Waiting for translation..."></input>
     </div>
-  
   </main>
 </body>
 
