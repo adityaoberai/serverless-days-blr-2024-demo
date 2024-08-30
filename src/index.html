@@ -51,10 +51,10 @@
     <div id="form">
       <form id="translationForm" onsubmit="getTranslation(); return false;">
         <label for="text">Text to translate</label>
-        <input type="text" id="text" name="text" placeholder="Enter your text here">
+        <input type="text" id="text" name="text" placeholder="Enter your text here" required>
         
         <label for="lang">Language to translate to</label>
-        <input type="text" id="lang" name="lang" placeholder="Spanish">
+        <input type="text" id="lang" name="lang" placeholder="Spanish" required>
 
         <button type="submit" id="submitButton">
           <span id="loadingIcon"></span>
